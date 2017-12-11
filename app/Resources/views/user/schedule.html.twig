@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block breadcrumps %}
+    <a href="{{ path('homepage') }}"><i class="material-icons">home</i></a> <i class="material-icons">chevron_right</i>
+    <i class="material-icons">date_range</i><span>Réserver mon prochain créneau</span>
+{% endblock %}
+
+{% block content %}
+    <div class="center">
+        <div>Il vous reste 3h00 de services à faire avant le 31/12/2017.</div>
+
+        <div>
+          <table class="bordered">
+            <thead>
+              <tr>
+                <td></td>
+                {% for open_day in open_days %}
+                    <td class="center-align" style="border-left:2px solid">{{ open_day }}</td>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for shifts_for_hour in all_shifts_per_hours %}
+                <tr>
+                    <td class="right-align"><b>{{ shifts_for_hour.hours }}</b></td>
+                    {% for daily_shift_for_hour in shifts_for_hour.daily_shifts %}
+                        <td class="creneau" style="border-left:2px solid #e3f2fd;">
+                            {{ daily_shift_for_hour }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            <tr>
+                <td class="right-align"><b>6h-7h30</b></td>
+                <td class="creneau blocked" style="border-left:2px solid #e3f2fd;background: lightgray;text-align: center;color: gray;">
+                    Créneau fermé
+                </td>
+                <td class="creneau light-green lighten-3" style="border-left:2px solid #bbdefb;cursor:pointer;">
+                    <small>Créneau complet</small>
+                </td>
+                <td class="creneau green lighten-4" style="border-left:2px solid #90caf9;cursor:not-allowed;">
+                    <small>2 places</small>
+                </td>
+            </tr>
+            <tr>
+                <td class="right-align"><b>7h30-10h30</b></td>
+                <td class="creneau blocked" style="border-left:2px solid #e3f2fd;background: lightgray;text-align: center;color: gray;">
+                    Créneau fermé
+                </td>
+                <td class="creneau green lighten-4" style="border-left:2px solid #bbdefb;cursor:not-allowed;">
+                    <small>5 places</small>
+                </td>
+                <td class="creneau light-green lighten-3" style="border-left:2px solid #90caf9;cursor:pointer;">
+                    <small>Créneau complet</small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+{% endblock %}

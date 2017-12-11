@@ -72,6 +72,34 @@ class UserController extends Controller
     }
 
     /**
+     * Display user next shift or display schedule for selection.
+     *
+     * @Route("/schedule", name="user_schedule")
+     * @Method("GET")
+     */
+    public function userScheduleAction(Request $request)
+    {
+        $current_app_user = $this->get('security.token_storage')->getToken()->getUser();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        return $this->render('user/schedule.html.twig', array(
+            'ip' => $request->getClientIp(),
+            'open_days' => array('Jeu 30 nov', 'Ven 1 dec', 'Sam 2 dec'),
+            'all_shifts_per_hours' => array(
+                array(
+                    'hours' => '6h-7h30',
+                    'daily_shifts' => array('Créneau fermé', 'Créneau complet', '2 postes')
+                ),
+                array(
+                    'hours' => '7h30-10h30',
+                    'daily_shifts' => array('Créneau fermé', '5 postes', 'Créneau complet')
+                )
+            )
+        ));
+    }
+
+    /**
      * Import from CSV
      *
      * @Route("/join", name="user_join")
