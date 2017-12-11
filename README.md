@@ -24,6 +24,7 @@ Espace adhérent l'éléfàn
 * ``git clone https://github.com/elefan-grenoble/gestion-compte.git``
 * ``cd gestion-compte``
 * ``composer install``
+* ``bin/console doctrine:database:create``
 * ``bin/console doctrine:schema:create``
 * add ``127.0.0.1 membres.lelefan.local`` to your _/etc/hosts_ file
 * ``php bin/console server:start``
